@@ -30,3 +30,12 @@ class SubscribeTest(TestCase):
     def test_form_has_fields(self):
         form = self.resp.context['form']
         self.assertSequenceEqual(['name', 'cpf', 'email', 'phone'], list(form.fields))
+
+
+class SubscribePostTest(TestCase):
+    def setUp(self):
+        data = dict(name='Amauri Rossetti', cpf='12345678901', email='amauri@gmail.com', phone='11999998888')
+        self.resp = self.client.post('/inscricao/', data)
+
+    def test_post(self):
+        self.assertEqual(self.resp.status_code, 302)
